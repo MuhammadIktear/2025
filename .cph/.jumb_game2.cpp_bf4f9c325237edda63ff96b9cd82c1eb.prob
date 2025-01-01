@@ -1,0 +1,1 @@
+{"name":"Local: jumb_game2","url":"c:\\2025\\jumb_game2.cpp","tests":[{"id":1735707318595,"input":"5\n2 3 1 1 4","output":""},{"id":1735709554588,"input":"5\n2 3 1 0 4","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\2025\\jumb_game2.cpp","group":"local","local":true}
