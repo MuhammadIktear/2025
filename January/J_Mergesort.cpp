@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
-
-void merge(int arr[],int l,int m,int r){
+const int mx=1e6+123;
+void merge(vector<int>&arr,int l,int m,int r){
     int lsz=(m-l)+1;
     int rsz=r-m;
     int L[lsz];
@@ -41,9 +41,7 @@ void merge(int arr[],int l,int m,int r){
     }       
 }
 
-void merge_sort(int arr[],int l,int r){
-    // for(int i=l;i<=r;i++)cout<<arr[i]<<" ";
-    // cout<<endl;
+void merge_sort(vector<int>&arr,int l,int r){
     if(l<r){
         int mid=(l+r)/2;
         merge_sort(arr,l,mid);
@@ -52,10 +50,12 @@ void merge_sort(int arr[],int l,int r){
     }
 }
 int main(){
-    int n;
-    cin>>n;
-    int arr[n];
-    for(int i=0;i<n;i++)cin>>arr[i];
+    vector<int>arr;
+    int num;
+    while (cin >> num) {
+        arr.push_back(num);
+    }
+    int n=arr.size();
     merge_sort(arr,0,n-1);
     for(int i=0;i<n;i++)cout<<arr[i]<<" ";
 }
