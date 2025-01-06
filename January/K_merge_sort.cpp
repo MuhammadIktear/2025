@@ -31,7 +31,7 @@ void merge(int arr[], int l, int m, int r) {
     while (i < lsz) {
         arr[cur] = L[i];
         i++;
-        cur++;
+        cur++;  
     }
     while (j < rsz) {
         arr[cur] = R[j];
