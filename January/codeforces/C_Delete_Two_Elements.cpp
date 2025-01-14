@@ -50,28 +50,53 @@ inline ll modPow(ll b, ll p) { ll r = 1; while(p) { if(p&1) r = modMul(r, b); b 
 
 const int mx = 1e5+123;
 
-void solve()
-{
-    in2(n,k);
-    vector<pair<int,int>>v;
-    loop(0,i,n){
-        int val;
-        cin>>val;
-        if(val%k==0)v.push_back({0,i});
-        else v.push_back({k-(val%k),i});
+void solve() {
+    int n;
+    cin >> n;
+    
+    if (n <= 0) {
+        cout << 0 << endl;
+        return;
     }
-    sortv(v);
-    for(auto u:v){
-        cout<<u.second+1<<" ";
+
+    vector<int> arr(n);
+    map<int, int> freq;
+    int sum = 0;
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+        sum += arr[i];
+        freq[arr[i]]++;
     }
-    cout<<endl;
+
+    if (sum % n != 0) {
+        cout << 0 << endl;
+        return;
+    }
+
+    int targetSum = 2 * (sum / n);
+    int ans = 0;
+
+    for (auto &entry : freq) {
+        int num1 = entry.first;
+        int num2 = targetSum - num1;
+
+        if (freq[num1] > 0 && freq.count(num2)) {
+            if (num1 == num2) {
+                ans += (freq[num1] * (freq[num1] - 1)) / 2;
+            } else if (num1 < num2) {
+                ans += freq[num1] * freq[num2];
+            }
+        }
+    }
+
+    cout << ans << endl;
 }
 
-int32_t main()
-{
+int32_t main() {
     fast_io;
-    int t = 1;
-    cin >> t;  
+    int t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }

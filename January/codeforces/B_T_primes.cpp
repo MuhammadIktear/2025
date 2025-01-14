@@ -49,22 +49,21 @@ inline ll modSub(ll a, ll b) { a %= MOD, b %= MOD; normal(a), normal(b); a -= b;
 inline ll modPow(ll b, ll p) { ll r = 1; while(p) { if(p&1) r = modMul(r, b); b = modMul(b, b); p >>= 1; } return r; }
 
 const int mx = 1e5+123;
+bool isPrime(int n){
+    if(n<2||(n>2&&n%2==0))return false;
+    for(int i=3;i*i<=n;i+=2){
+        if(n%i==0)return false;
+    }
+    return true;
+}
 
 void solve()
 {
-    in2(n,k);
-    vector<pair<int,int>>v;
-    loop(0,i,n){
-        int val;
-        cin>>val;
-        if(val%k==0)v.push_back({0,i});
-        else v.push_back({k-(val%k),i});
-    }
-    sortv(v);
-    for(auto u:v){
-        cout<<u.second+1<<" ";
-    }
-    cout<<endl;
+    int a;
+    cin>>a;
+    int x=sqrt(a);
+    if(x*x==a&&isPrime(x))py;
+    else pn;
 }
 
 int32_t main()
