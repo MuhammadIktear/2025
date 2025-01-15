@@ -49,48 +49,26 @@ inline ll modSub(ll a, ll b) { a %= MOD, b %= MOD; normal(a), normal(b); a -= b;
 inline ll modPow(ll b, ll p) { ll r = 1; while(p) { if(p&1) r = modMul(r, b); b = modMul(b, b); p >>= 1; } return r; }
 
 const int mx = 1e5+123;
-
 void solve() {
-    int n;
-    cin >> n;
-    
-    if (n <= 0) {
-        cout << 0 << endl;
-        return;
+    map<int,int>mp;
+    in(n);
+    vec v(n);
+    int sum=0;
+    loop(0,i,n){
+        int val;
+        cin>>val;
+        v[i]=val;
+        sum+=val;
     }
-
-    vector<int> arr(n);
-    map<int, int> freq;
-    int sum = 0;
-
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
-        sum += arr[i];
-        freq[arr[i]]++;
+    int x=(2*sum)/n;
+    //cout<<x<<endl;
+    int ans=0;
+    for(auto u:v){
+        ans+=mp[x-u];
+        mp[u]++;
     }
-
-    if (sum % n != 0) {
-        cout << 0 << endl;
-        return;
-    }
-
-    int targetSum = 2 * (sum / n);
-    int ans = 0;
-
-    for (auto &entry : freq) {
-        int num1 = entry.first;
-        int num2 = targetSum - num1;
-
-        if (freq[num1] > 0 && freq.count(num2)) {
-            if (num1 == num2) {
-                ans += (freq[num1] * (freq[num1] - 1)) / 2;
-            } else if (num1 < num2) {
-                ans += freq[num1] * freq[num2];
-            }
-        }
-    }
-
-    cout << ans << endl;
+    if(2*sum%n!=0)ans=0;
+    cout<<ans<<endl;
 }
 
 int32_t main() {
