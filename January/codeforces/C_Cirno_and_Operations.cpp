@@ -176,14 +176,14 @@ void solve()
     while (v.size() > 1)
     {
         vector<int> diff;
-        loop(0, i, v.size() - 1)
+        loop(0,i,v.size()-1)
         {
-            diff.push_back(v[i + 1] - v[i]);
+            diff.push_back(v[i+1]-v[i]);
         }
         int sum = accumulate(diff.begin(), diff.end(), 0LL);
-        if (sum < 0)  sum = sum * (-1);
+        if (sum < 0) sum=-sum;
         res = max(res, sum);
-        v = vector<int>(diff.rbegin(), diff.rend());
+        v = vector<int>(diff.begin(), diff.end());
     }
     cout << max(res, v[0]) << endl;
 }
