@@ -50,27 +50,31 @@ inline ll modPow(ll b, ll p) { ll r = 1; while(p) { if(p&1) r = modMul(r, b); b 
 
 const int mx = 1e5+123;
 
-void solve() {
-    in2(n, k);
-    vec v(n + 1);
-    loop(1, i, n + 1) cin >> v[i];
-    int pre[n + 1], sumv[n + 1];
-    pre[0] = sumv[0] = 0;
-    loop(1, i, n + 1) {
-        pre[i] = pre[i - 1] + v[i];
-        sumv[i] = sumv[i - 1] + v[i] * i;
+void solve()
+{
+    in(n);
+    vec v(n);
+    read(v);
+    int pre_gcd[n+1],suff_gcd[n+1];
+    pre_gcd[0]=0,suff_gcd[n]=0;
+    loop(1,i,n+1){
+        pre_gcd[i]=gcd(pre_gcd[i-1],v[i-1]);
     }
-    int maxi = sumv[k];
-    loop(k + 1, i, n + 1) {
-        int sum = (sumv[i] - sumv[i - k]) - (pre[i] - pre[i - k]) * k;
-        maxi = max(maxi, sum);
+    for(int i=n-1;i>=0;i--){
+        suff_gcd[i]=gcd(suff_gcd[i+1],v[i]);
     }
-    cout << maxi << endl;
+    int maxi=0;
+    loop(0,i,n){
+        maxi=max(maxi,gcd(pre_gcd[i],suff_gcd[i+1]));
+    }
+    cout<<maxi<<endl;
 }
 
-int32_t main() {
+int32_t main()
+{
     fast_io;
     int t = 1;
+    //cin >> t;  
     while (t--) solve();
     return 0;
 }
