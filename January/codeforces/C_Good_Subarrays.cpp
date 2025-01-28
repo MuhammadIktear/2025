@@ -59,9 +59,20 @@ void solve()
     int arr[n+1];
     arr[0]=0;
     loop(1,i,n+1){
-        arr[i]=(s[i-1]-'0')-(i-1);
+        arr[i]=(s[i-1]-'0');
     }
-    printv(arr);
+    loop(1,i,n+1){
+        arr[i]+=arr[i-1];
+    }    
+    //printv(arr);
+    map<int,int>mp;
+    int ans=0;
+    loop(0,i,n+1){
+        int diff=arr[i]-i;
+        ans+=mp[diff];
+        mp[diff]++;
+    }
+    cout<<ans<<endl;
 }
 
 int32_t main()
