@@ -49,43 +49,45 @@ inline ll modSub(ll a, ll b) { a %= MOD, b %= MOD; normal(a), normal(b); a -= b;
 inline ll modPow(ll b, ll p) { ll r = 1; while(p) { if(p&1) r = modMul(r, b); b = modMul(b, b); p >>= 1; } return r; }
 
 const int mx = 1e5+123;
-int n,k;
-vector<int>v;
-int NumOfOp(int m){
-    int sum=0;
-    loop(n/2,i,n){
-        if(v[i]<m)sum+=m-v[i];
-    }
-    return sum;
-}
-int isOK(int m){
-    if(NumOfOp(m)<=k)return 0;
-    return 1;
-}
+
 void solve()
 {
-    cin>>n>>k;
+    in(n);
+    vec v(n),v2(n);
+    read(v),read(v2);
+    sortv(v),sortv(v2);
+    set<int>st;
     loop(0,i,n){
-        in(val);
-        v.push_back(val);
+        st.insert({v[i]+v2[i]});
     }
-    sortv(v);
-    int l=0,r=1e9+1+k;
-    while(l<r){
-        int mid=l+r>>1;
-        if(isOK(mid)==0){
-            l=mid+1;
+    if(st.size()>=3){
+        py;
+        return;
+    }
+    else{
+        loop(0,i,n-1){
+            if(v[i]!=v[i+1]){
+                swap(v[i],v[i+1]);
+            }
+            st.clear();
+            loop(0,i,n){
+                st.insert({v[i]+v2[i]});
+            }
+            if(st.size()>=3){
+                py;
+                return;
+            }
+            swap(v[i],v[i+1]);
         }
-        else r=mid;
     }
-    cout<<l-1<<endl;
+    pn;
 }
 
 int32_t main()
 {
     fast_io;
     int t = 1;
-    //cin >> t;  
+    cin >> t;  
     while (t--) solve();
     return 0;
 }
